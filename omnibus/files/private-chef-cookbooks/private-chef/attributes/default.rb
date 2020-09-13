@@ -177,14 +177,6 @@ default['private_chef']['opscode-solr4']['elasticsearch_replica_count'] = 1
 # Chef Expander
 ####
 # default['private_chef']['opscode-expander']['enable'] defined in recipes/config.rb
-default['private_chef']['opscode-expander']['dir'] = '/var/opt/opscode/opscode-expander'
-default['private_chef']['opscode-expander']['log_directory'] = '/var/log/opscode/opscode-expander'
-default['private_chef']['opscode-expander']['log_rotation']['file_maxbytes'] = 104857600
-default['private_chef']['opscode-expander']['log_rotation']['num_to_keep'] = 10
-default['private_chef']['opscode-expander']['consumer_id'] = 'default'
-default['private_chef']['opscode-expander']['nodes'] = 2
-default['private_chef']['opscode-expander']['max_retries'] = 1
-default['private_chef']['opscode-expander']['retry_wait'] = 1
 
 ####
 # Elasticsearch
