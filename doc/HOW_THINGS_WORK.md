@@ -33,24 +33,6 @@ Chef Server has 3 different "search_queue_mode"s:
 This configurable controls how the chef_index module sends requests to
 the search index. The default is `rabbitmq`.
 
-### Rabbitmq
-
-```
-  +--------+    +----------+    +------------------+    +------+
-  | erchef | -> | rabbitmq | <- | opscode-expander | -> | Solr |
-  +--------+    +----------+    +------------------+    +------+
-```
-
-In the rabbitmq search_queue_mode, erchef places the object to be
-indexed on a rabbitmq queue. It them moves forward with the request
-and returns a response to the user.  Another service named
-`opscode-expander` reads the object from the queue, expands it (see
-Document Expansion for details), and posts it to solr. Note that a
-failure to write to the search index will not trigger a failure of the
-API request that wrote the data since it happens asynchronously via a
-queue. However, a failure to place the item on rabbitmq will cause a
-500 error.
-
 ### Batch
 ```
   +--------+    +------+
@@ -129,8 +111,7 @@ generate an immediate inline request to the search index.
 ### Document Expansion
 
 Before sending a document (such as a node object) to the search index,
-we reformat it using either opscode-expander or the code in erchef's
-chef_index_expand module.
+we reformat it using the code in erchef's chef_index_expand module.
 
 We do this "expansion" to make better use of the search index.  For
 some historical details on this design, see:
