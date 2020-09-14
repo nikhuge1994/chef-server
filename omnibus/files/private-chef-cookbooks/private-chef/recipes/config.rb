@@ -86,7 +86,6 @@ else
     # If the user has enabled external solr4 we keep these defaults
     # more or less the same as they were before the change-over to
     # Elasticsearch.
-    node.default['private_chef']['opscode-expander']['enable'] = true
     node.default['private_chef']['opscode-solr4']['enable'] = false
     node.default['private_chef']['elasticsearch']['enable'] = false
 
@@ -100,7 +99,6 @@ else
     # This is the same as the block above, but we want to be explicit
     # about it as the situation is very confusing.
     node.default['private_chef']['opscode-solr4']['enable'] = true
-    node.default['private_chef']['opscode-expander']['enable'] = true
     node.default['private_chef']['elasticsearch']['enable'] = false
 
     node.default['private_chef']['opscode-erchef']['search_provider'] = 'solr'
@@ -108,7 +106,6 @@ else
   else
     # Our new default of Elasticsearch indexing
     node.default['private_chef']['opscode-solr4']['enable'] = false
-    node.default['private_chef']['opscode-expander']['enable'] = false
     node.default['private_chef']['elasticsearch']['enable'] = true
 
     node.default['private_chef']['opscode-erchef']['search_provider'] = 'elasticsearch'

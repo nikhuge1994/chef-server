@@ -174,11 +174,6 @@ default['private_chef']['opscode-solr4']['elasticsearch_shard_count'] = 5
 default['private_chef']['opscode-solr4']['elasticsearch_replica_count'] = 1
 
 ####
-# Chef Expander
-####
-# default['private_chef']['opscode-expander']['enable'] defined in recipes/config.rb
-
-####
 # Elasticsearch
 ####
 var_base = '/var/opt/opscode'
