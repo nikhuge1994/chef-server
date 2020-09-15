@@ -54,6 +54,27 @@ resource "null_resource" "chef_server_config" {
     script = "${path.module}/../../../common/files/add_user.sh"
   }
 
+  # generate chef-load.toml template
+  data "template_file" "chef_load_config" {
+    template = file("${path.module}/templates/chef-backend.rb.tpl")
+
+    vars = {
+      chef_server_url = var.enable_ipv6 == "true" ? module.chef_server.public_ipv6_address : module.chef_server.private_ipv4_address
+      num_nodes = 100
+      interval = 2
+    }
+  }
+
+  provisioner "file" {
+    content     = data.template_file.chef_load_config.rendered
+    destination = "/tmp/chef-load.toml"
+  }
+
+  # add nodes
+  provisioner "remote-exec" {
+    script = "${path.module}/../../../common/files/add_nodes.sh"
+  }
+
   # upgrade chef-server
   provisioner "remote-exec" {
     inline = [
